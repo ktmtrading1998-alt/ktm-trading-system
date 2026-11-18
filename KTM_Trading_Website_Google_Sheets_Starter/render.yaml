@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ktm-trading-cloud
+    runtime: docker
+    plan: starter
+    healthCheckPath: /healthz
+    envVars:
+      - key: KTM_SECRET_KEY
+        generateValue: true
+      - key: KTM_HTTPS
+        value: "1"
+      - key: KTM_DB_PATH
+        value: /data/ktm_data.sqlite3
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    disk:
+      name: ktm-persistent-data
+      mountPath: /data
+      sizeGB: 1
